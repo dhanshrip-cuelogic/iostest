@@ -3,6 +3,7 @@ print(tuple1.0)
 print(tuple1.1)
 print(tuple1.2)
 /*
+ The values in a tuple can be of any type, and do not need to be of same type.
  once you create a tuple, you cannot append elements to it, because that would change the type of the tuple.
 */
 tuple1.2=25
