@@ -1,54 +1,33 @@
 //
-//  ContactsTableViewController.swift
-//  tableViewControllerExample
+//  DistrictsTableTableViewController.swift
+//  tableVCExample
 //
-//  Created by Dhanshri Pawar on 24/03/20.
+//  Created by Dhanshri Pawar on 29/03/20.
 //  Copyright © 2020 Dhanshri Pawar. All rights reserved.
 //
 
-/*
- In this project a contact list will be displayed and on selection of any one contact a print statement will execute and it will display the mobile no. on console.
- */
-
 import UIKit
 
-class ContactsTableViewController: UITableViewController {
+class DistrictsTableTableViewController: UITableViewController {
     
+    var numberOfRows : Int = 0
     
-    let contacts:[[String]] = [
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"]
-    ]
+    var state : String = ""
+    
+    var AndraPradesh = ["Anantpur","Chittoor","East Godavari","Guntur","Kapada"]
+    var ArunachalPradesh = ["Anjaw","Changlang","Kamle"]
+    var Assam = ["Baska","Cachar","Dhubri"]
+    var Bihar = ["Arwal","Patna","Saran"]
+    var Chattisgarh = ["Batar", "Bijapur"]
+    var Maharashtra = ["Sangli","Satara","Pune","Osmanabad","Kolhapur","Solapur","Mumbai"]
+    
+    var districtData : [String:[String]] = ["":[""]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
 
+        districtData = ["Andra Pradesh" : AndraPradesh,"Arunachal Pradesh" : ArunachalPradesh,"Assam" : Assam,"Bihar" : Bihar,"Chattisgarh" : Chattisgarh,"Maharashtra" : Maharashtra]
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -65,33 +44,24 @@ class ContactsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return contacts.count
+        return districtData[state]!.count
     }
 
+  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier")
-       
-
-        if cell == nil
-        {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellIdentifier")
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         }
+ 
+        let cellData = districtData[state]
         
-        print("Section = \(indexPath.section), Row = \(indexPath.row)")
-
-        cell!.textLabel?.text = contacts[indexPath.row][0]
-        cell!.detailTextLabel?.text = contacts[indexPath.row][1]
+        cell?.textLabel?.text = cellData![indexPath.row]
 
         return cell!
     }
   
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-            print("Calling: \(contacts[indexPath.row][1])")
-
-    }
-
 
     /*
     // Override to support conditional editing of the table view.

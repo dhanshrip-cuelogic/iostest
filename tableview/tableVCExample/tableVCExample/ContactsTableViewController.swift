@@ -1,54 +1,63 @@
 //
 //  ContactsTableViewController.swift
-//  tableViewControllerExample
+//  tableVCExample
 //
-//  Created by Dhanshri Pawar on 24/03/20.
+//  Created by Dhanshri Pawar on 26/03/20.
 //  Copyright © 2020 Dhanshri Pawar. All rights reserved.
 //
 
+
 /*
- In this project a contact list will be displayed and on selection of any one contact a print statement will execute and it will display the mobile no. on console.
- */
+This project contains a table which shows list of states alphabetically.
+On selecting any one state, its respective districts list is shown on other table view controller.
+ 
+ NOTE:- Only Andra Pradesh, Arunachal Pradesh, Assam, Bihar, Chattisgarh and Maharashtra contains the list of districts for example purpose.
+*/
+
 
 import UIKit
 
 class ContactsTableViewController: UITableViewController {
     
+    let letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T",
+                   "U","V","W","X","Y","Z"]
     
-    let contacts:[[String]] = [
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"],
-        ["ABC", "999999999"]
-    ]
+    let letterA = ["Andra Pradesh", "Arunachal Pradesh", "Assam"]
+    let letterB = ["Bihar"]
+    let letterC = ["Chattisgarh"]
+    let letterD = [""]
+    let letterE = [""]
+    let letterF = [""]
+    let letterG = ["Goa","Gujarat"]
+    let letterH = ["Haryana", "Himachal Pradesh"]
+    let letterI = [""]
+    let letterJ = ["Jharkhand"]
+    let letterK = ["Karnataka", "Kerela"]
+    let letterL = [""]
+    let letterM = ["Madhya Pradesh", "Meghalaya", "Manipur","Maharashtra","Mizoram"]
+    let letterN = ["Nagaland"]
+    let letterO = ["Orissa"]
+    let letterP = ["Punjab"]
+    let letterQ = [""]
+    let letterR = ["Rajasthan"]
+    let letterS = ["Sikkim"]
+    let letterT = ["TamilNadu","Telangana","Tripura"]
+    let letterU = ["Uttarakhand", "Uttar Pradesh"]
+    let letterV = [""]
+    let letterW = ["West Bengal"]
+    let letterX = [""]
+    let letterY = [""]
+    let letterZ = [""]
+
     
+    var stateData : [[String]] = [[""]]
+    
+    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
 
+      stateData = [letterA,letterB,letterC,letterD,letterE,letterF,letterG,letterH,letterI,letterJ,letterK,letterL,letterM,letterN,letterO,letterP,letterQ,letterR,letterS,letterT,letterU,letterV,letterW,letterX,letterY,letterZ]
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -60,38 +69,42 @@ class ContactsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return letters.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return contacts.count
+        return stateData[section].count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return letters[section]
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier")
-       
-
         if cell == nil
         {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellIdentifier")
+            cell = UITableViewCell(style: .default, reuseIdentifier: "reuseIdentifier")
         }
         
-        print("Section = \(indexPath.section), Row = \(indexPath.row)")
-
-        cell!.textLabel?.text = contacts[indexPath.row][0]
-        cell!.detailTextLabel?.text = contacts[indexPath.row][1]
-
+        cell?.textLabel?.text = stateData[indexPath.section][indexPath.row]
+        
         return cell!
     }
-  
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-            print("Calling: \(contacts[indexPath.row][1])")
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let districtPage = DistrictsTableTableViewController(nibName: "DistrictsTableTableViewController", bundle: nil)
+    
+        districtPage.state = stateData[indexPath.section][indexPath.row]
+        
+        navigationController?.pushViewController(districtPage, animated: true)
+        
+        
     }
-
+   
 
     /*
     // Override to support conditional editing of the table view.
