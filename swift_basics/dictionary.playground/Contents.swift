@@ -12,3 +12,5 @@ print("---------------------")
 var dictionary1 : [String : String] = ["firstname": "Dhanshri", "lastname": "Pawar"]
 print(dictionary1["firstname"]!)
 print(dictionary1["lastname"]!)
+
+
