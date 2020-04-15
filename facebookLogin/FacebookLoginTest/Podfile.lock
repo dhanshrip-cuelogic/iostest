@@ -1,0 +1,31 @@
+PODS:
+  - FBSDKCoreKit (6.3.0):
+    - FBSDKCoreKit/Basics (= 6.3.0)
+    - FBSDKCoreKit/Core (= 6.3.0)
+  - FBSDKCoreKit/Basics (6.3.0)
+  - FBSDKCoreKit/Core (6.3.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKCoreKit/Swift (6.3.0):
+    - FBSDKCoreKit/Core
+  - FBSDKLoginKit/Login (6.3.0):
+    - FBSDKCoreKit (~> 6.3.0)
+  - FBSDKLoginKit/Swift (6.3.0):
+    - FBSDKCoreKit/Swift (~> 6.3.0)
+    - FBSDKLoginKit/Login
+
+DEPENDENCIES:
+  - FBSDKCoreKit/Swift
+  - FBSDKLoginKit/Swift
+
+SPEC REPOS:
+  trunk:
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+
+SPEC CHECKSUMS:
+  FBSDKCoreKit: 5d55c8f3007c9c49b793617b9102e46355fc7e17
+  FBSDKLoginKit: d46aa04d9bb9990a4deb6441736fae24a8c94496
+
+PODFILE CHECKSUM: 05cb2fafee2b409a3c3cdd8effb774a244489c2f
+
+COCOAPODS: 1.9.1
